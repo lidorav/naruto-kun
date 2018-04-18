@@ -1,5 +1,6 @@
 package algorithms.mazeGenerators;
 
+// Hello world How are you lidor? I am fine. Nice to meet you
 public class SimpleMazeGenerator extends AMazeGenerator {
     public SimpleMazeGenerator() {
     }
