@@ -1,5 +1,7 @@
 package algorithms.mazeGenerators;
 
+
+//ccczvxk zklnklndfnfkfdg
 public class SimpleMazeGenerator extends AMazeGenerator {
     public SimpleMazeGenerator() {
     }
