@@ -9,9 +9,8 @@ public class SimpleMazeGenerator extends AMazeGenerator {
     public Maze generate(int row, int col) {
         int[][] temp2DArr = new int[row][col];
         initArr(temp2DArr);
-        Position startPos = createPosition(temp2DArr);
-        Position goalPos = createPosition(temp2DArr);
-        pathGradient(temp2DArr,startPos,goalPos);
+        Position startPos = createStartPosition(temp2DArr);
+        Position goalPos = createGoalPosition(temp2DArr,startPos);
         return new Maze(temp2DArr,startPos,goalPos);
     }
 
@@ -20,36 +19,53 @@ public class SimpleMazeGenerator extends AMazeGenerator {
             for (int j = 0; j < arr[i].length; j++)
                 arr[i][j] = 1;
     }
-    private Position createStartPosition(int row, int col){
-        int i= (int)Math.random()*2;
-    return null;
-    }
 
-    private Position createPosition(int[][] arr) {
+    private Position createStartPosition(int[][] arr) {
         int row=arr.length;
         int col=arr[0].length;
         int i, j, applyValue;
         int chooseConstVar = (int)(Math.random() * 2); // choose between i or j who will be the const
-        do {
             if (chooseConstVar == 0) {
                 applyValue = (int)(Math.random() * 2); // choose what value to apply the const var between 2 options
                 if (applyValue == 0)
                     i = 0;
                 else
                     i = row-1;
-                j = 1 + (int) (Math.random() * (col - 2));
+                j = 1 + (int)(Math.random() * (col - 2));
             } else {
-                applyValue = (int) Math.random() * 2; // choose what value to apply the const var between 2 options
+                applyValue = (int)(Math.random() * 2); // choose what value to apply the const var between 2 options
                 if (applyValue == 0)
                     j = 0;
                 else
                     j = col-1;
-                i = 1 + (int) (Math.random() * (row - 2));
+                i = 1 + (int)(Math.random() * (row - 2));
             }
-        } while (arr[i][j] == 0);
         arr[i][j] = 0;
         return new Position(i, j);
      }
+     private Position createGoalPosition(int[][] arr, Position start){
+        int i=0,j=0;
+        int row=arr.length;
+        int col=arr[0].length;
+        if(start.getRowIndex()==0){
+            i = row - 1;
+            j = 1 + (int) (Math.random() * (col - 2));
+        }
+         if(start.getRowIndex()==row-1){
+             i = 0;
+             j = 1 + (int) (Math.random() * (col - 2));
+         }
+         if(start.getColumnIndex()==0){
+             i = 1 + (int)(Math.random() * (row - 2));
+             j = col -1;
+         }
+         if(start.getColumnIndex()==col-1) {
+             i = 1 + (int)(Math.random() * (row - 2));
+             j = 0;
+         }
+         arr[i][j] = 0;
+         return new Position(i, j);
+    }
 
     private void pathGradient (int [][]arr, Position startPosition, Position goalPosition) {
 
