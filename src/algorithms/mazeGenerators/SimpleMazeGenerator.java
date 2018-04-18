@@ -69,29 +69,27 @@ public class SimpleMazeGenerator extends AMazeGenerator {
          return new Position(i, j);
     }
 
-
-
     private void makePath(Position startPosition,Position goalPosition,int [][]arr){
         int verticalSteps = startPosition.getRowIndex() - goalPosition.getRowIndex();
         int horizontalSteps = startPosition.getColumnIndex() - goalPosition.getColumnIndex();
         int i=0,j=0;
-        if (verticalSteps<0)
-            for (i=startPosition.getRowIndex()+1;i<arr.length-1;i++){
+
+        if((startPosition.getRowIndex()==0) && (startPosition.getColumnIndex()>=goalPosition.getColumnIndex())) {
+            for (i = startPosition.getRowIndex() + 1; i < arr.length - 1; i++)
                 arr[i][startPosition.getColumnIndex()] = 0;
-            }
-        if (verticalSteps>0)
-            for (i=startPosition.getRowIndex()-1;i>0;i--){
-                arr[i][startPosition.getColumnIndex()]=0;
-            }
-        if (horizontalSteps<0)
-            for (j=startPosition.getColumnIndex()+1;j<=Math.abs(horizontalSteps);j++){
-                arr[i][j]=0;
-            }
-        if (horizontalSteps>0)
-            for (j=startPosition.getColumnIndex()-1;j>=horizontalSteps;j--){
-                arr[i][startPosition.getColumnIndex()]=0;
-            }
+            for (j = startPosition.getColumnIndex(); j >= goalPosition.getColumnIndex(); j--)
+                arr[goalPosition.getRowIndex()-1][j] = 0;
+        }
+        if((startPosition.getRowIndex()==0) && (startPosition.getColumnIndex()<goalPosition.getColumnIndex())) {
+            for (i = startPosition.getRowIndex() + 1; i < arr.length - 1; i++)
+                arr[i][startPosition.getColumnIndex()] = 0;
+            for (j = startPosition.getColumnIndex(); j <= goalPosition.getColumnIndex(); j++)
+                arr[goalPosition.getRowIndex()-1][j] = 0;
+        }
+
     }
+
+
 
     public static void main(String[] args) {
         IMazeGenerator sMaze = new SimpleMazeGenerator();

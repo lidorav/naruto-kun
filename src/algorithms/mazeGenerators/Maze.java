@@ -25,10 +25,23 @@ public class Maze {
         return goalPosition;
     }
 
-    public void print()
-    {
-        for(int i=0;i<m_2DArr.length;i++)
-            System.out.println(Arrays.toString(m_2DArr[i])+"\n");
+    public void print() {
+        int i=0,j=0;
+        for (i = 0; i < m_2DArr.length; i++) {
+            System.out.print("[ ");
+            for (j = 0; j < m_2DArr[i].length; j++) {
+                if (i == startPosition.getRowIndex() && j == startPosition.getColumnIndex()) {
+                    System.out.print("S ");
+                    continue;
+                }
+                if (i == goalPosition.getRowIndex() && j == goalPosition.getColumnIndex()) {
+                    System.out.print("E ");
+                    continue;
+                }
+                System.out.print(m_2DArr[i][j] + " ");
+            }
+            System.out.print("] \n");
+        }
     }
 
 }
