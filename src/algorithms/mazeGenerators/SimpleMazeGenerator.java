@@ -12,7 +12,7 @@ public class SimpleMazeGenerator extends AMazeGenerator {
         initArr(temp2DArr);
         Position startPos = createPosition(temp2DArr);
         Position goalPos = createPosition(temp2DArr);
-       // pathGradient(temp2DArr,startPos,goalPos);
+        makePath(startPos,goalPos, temp2DArr);
         return new Maze(temp2DArr,startPos,goalPos);
     }
 
