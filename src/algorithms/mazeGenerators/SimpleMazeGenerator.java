@@ -1,7 +1,7 @@
 package algorithms.mazeGenerators;
 
-import javafx.geometry.Pos;
 
+//nira
 public class SimpleMazeGenerator extends AMazeGenerator {
     public SimpleMazeGenerator() {
     }
