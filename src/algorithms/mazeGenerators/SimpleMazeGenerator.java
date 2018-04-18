@@ -11,6 +11,7 @@ public class SimpleMazeGenerator extends AMazeGenerator {
         initArr(temp2DArr);
         Position startPos = createStartPosition(temp2DArr);
         Position goalPos = createGoalPosition(temp2DArr,startPos);
+        randomizeWalls(temp2DArr);
         return new Maze(temp2DArr,startPos,goalPos);
     }
 
@@ -21,25 +22,15 @@ public class SimpleMazeGenerator extends AMazeGenerator {
     }
 
     private Position createStartPosition(int[][] arr) {
-        int row=arr.length;
-        int col=arr[0].length;
+        int row = arr.length;
+        int col = arr[0].length;
         int i, j, applyValue;
-        int chooseConstVar = (int)(Math.random() * 2); // choose between i or j who will be the const
-            if (chooseConstVar == 0) {
-                applyValue = (int)(Math.random() * 2); // choose what value to apply the const var between 2 options
-                if (applyValue == 0)
-                    i = 0;
-                else
-                    i = row-1;
-                j = 1 + (int)(Math.random() * (col - 2));
-            } else {
-                applyValue = (int)(Math.random() * 2); // choose what value to apply the const var between 2 options
-                if (applyValue == 0)
-                    j = 0;
-                else
-                    j = col-1;
-                i = 1 + (int)(Math.random() * (row - 2));
-            }
+        applyValue = (int) (Math.random() * 2); // choose what value to apply the const var between 2 options
+        if (applyValue == 0)
+            i = 0;
+        else
+            i = row - 1;
+        j = 1 + (int) (Math.random() * (col - 2));
         arr[i][j] = 0;
         return new Position(i, j);
      }
@@ -54,14 +45,6 @@ public class SimpleMazeGenerator extends AMazeGenerator {
          if(start.getRowIndex()==row-1){
              i = 0;
              j = 1 + (int) (Math.random() * (col - 2));
-         }
-         if(start.getColumnIndex()==0){
-             i = 1 + (int)(Math.random() * (row - 2));
-             j = col -1;
-         }
-         if(start.getColumnIndex()==col-1) {
-             i = 1 + (int)(Math.random() * (row - 2));
-             j = 0;
          }
          arr[i][j] = 0;
          return new Position(i, j);
@@ -92,6 +75,13 @@ public class SimpleMazeGenerator extends AMazeGenerator {
             for (j=startCol;j<horiznalSteps;j--){
                 arr[i][startCol]=0;
             }
+    }
+
+    private void randomizeWalls(int [][] arr){
+        for(int i=1 ;i<arr.length-1;i++)
+            for(int j=1;j<arr[i].length-1;j++)
+                if(arr[i][j]==1)
+                    arr[i][j]=(int)(Math.random()*2);
     }
 
     public static void main(String[] args) {
