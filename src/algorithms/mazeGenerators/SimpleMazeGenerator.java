@@ -1,7 +1,7 @@
 package algorithms.mazeGenerators;
 
+import javafx.geometry.Pos;
 
-//ccczvxk zklnklndfnfkfdg
 public class SimpleMazeGenerator extends AMazeGenerator {
     public SimpleMazeGenerator() {
     }
@@ -12,7 +12,7 @@ public class SimpleMazeGenerator extends AMazeGenerator {
         initArr(temp2DArr);
         Position startPos = createPosition(temp2DArr);
         Position goalPos = createPosition(temp2DArr);
-        pathGradient(temp2DArr,startPos,goalPos);
+       // pathGradient(temp2DArr,startPos,goalPos);
         return new Maze(temp2DArr,startPos,goalPos);
     }
 
@@ -20,10 +20,6 @@ public class SimpleMazeGenerator extends AMazeGenerator {
         for (int i = 0; i < arr.length; i++)
             for (int j = 0; j < arr[i].length; j++)
                 arr[i][j] = 1;
-    }
-    private Position createStartPosition(int row, int col){
-        int i= (int)Math.random()*2;
-    return null;
     }
 
     private Position createPosition(int[][] arr) {
@@ -46,36 +42,31 @@ public class SimpleMazeGenerator extends AMazeGenerator {
                 else
                     j = col-1;
                 i = 1 + (int) (Math.random() * (row - 2));
-            }
+            }return new Position(i, j);
         } while (arr[i][j] == 0);
         arr[i][j] = 0;
-        return new Position(i, j);
+
      }
 
-    private void pathGradient (int [][]arr, Position startPosition, Position goalPosition) {
-
-        int rowPath = startPosition.getRowIndex() - goalPosition.getRowIndex();
-        int colPath = startPosition.getColumnIndex() - goalPosition.getColumnIndex();
-        makePath(startPosition.getRowIndex(),startPosition.getColumnIndex(), rowPath,colPath ,arr);
-    }
-
-    private void makePath(int startRow, int startCol, int verticalSteps, int horiznalSteps, int [][]arr){
+    private void makePath(Position startPosition,Position goalPosition,int [][]arr){
+        int verticalSteps = startPosition.getRowIndex() - goalPosition.getRowIndex();
+        int horizontalSteps = startPosition.getColumnIndex() - goalPosition.getColumnIndex();
         int i=0,j=0;
         if (verticalSteps<0)
-            for (i=startRow+1;i<arr.length-1;i++){
-                arr[i][startCol] = 0;
+            for (i=startPosition.getRowIndex()+1;i<arr.length-1;i++){
+                arr[i][startPosition.getColumnIndex()] = 0;
             }
         if (verticalSteps>0)
-            for (i=startRow-1;i<verticalSteps;i--){
-                arr[i][startCol]=0;
+            for (i=startPosition.getRowIndex();i>0;i--){
+                arr[i][startPosition.getColumnIndex()]=0;
             }
-        if (horiznalSteps<0)
-            for (j=startCol;j<horiznalSteps;j++){
-                arr[i][startCol]=0;
+        if (horizontalSteps<0)
+            for (j=startPosition.getColumnIndex();j<=Math.abs(horizontalSteps);j++){
+                arr[i][j]=0;
             }
-        if (verticalSteps>0)
-            for (j=startCol;j<horiznalSteps;j--){
-                arr[i][startCol]=0;
+        if (horizontalSteps>0)
+            for (j=startPosition.getColumnIndex();j>=horizontalSteps;j--){
+                arr[i][startPosition.getColumnIndex()]=0;
             }
     }
 
