@@ -1,7 +1,5 @@
 package algorithms.mazeGenerators;
 
-import java.util.Arrays;
-
 public class Maze {
     private int [][] m_2DArr;
     private Position startPosition;

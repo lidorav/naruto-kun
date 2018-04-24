@@ -1,6 +1,7 @@
 package algorithms.mazeGenerators;
 
-// Hello world How are you lidor? I am fine. Nice to meet you
+
+//nira
 public class SimpleMazeGenerator extends AMazeGenerator {
     public SimpleMazeGenerator() {
     }
@@ -10,9 +11,10 @@ public class SimpleMazeGenerator extends AMazeGenerator {
         int[][] temp2DArr = new int[row][col];
         initArr(temp2DArr);
         Position startPos = createStartPosition(temp2DArr);
-        Position goalPos = createGoalPosition(temp2DArr,startPos);
+        Position goalPos = createGoalPosition(temp2DArr, startPos);
+        makePath(startPos, goalPos, temp2DArr);
         randomizeWalls(temp2DArr);
-        return new Maze(temp2DArr,startPos,goalPos);
+        return new Maze(temp2DArr, startPos, goalPos);
     }
 
     private void initArr(int[][] arr) {
@@ -33,61 +35,50 @@ public class SimpleMazeGenerator extends AMazeGenerator {
         j = 1 + (int) (Math.random() * (col - 2));
         arr[i][j] = 0;
         return new Position(i, j);
-     }
-     private Position createGoalPosition(int[][] arr, Position start){
-        int i=0,j=0;
-        int row=arr.length;
-        int col=arr[0].length;
-        if(start.getRowIndex()==0){
+    }
+
+    private Position createGoalPosition(int[][] arr, Position start) {
+        int i = 0, j = 0;
+        int row = arr.length;
+        int col = arr[0].length;
+        if (start.getRowIndex() == 0) {
             i = row - 1;
             j = 1 + (int) (Math.random() * (col - 2));
         }
-         if(start.getRowIndex()==row-1){
-             i = 0;
-             j = 1 + (int) (Math.random() * (col - 2));
-         }
-         arr[i][j] = 0;
-         return new Position(i, j);
+        if (start.getRowIndex() == row - 1) {
+            i = 0;
+            j = 1 + (int) (Math.random() * (col - 2));
+        }
+        arr[i][j] = 0;
+        return new Position(i, j);
     }
 
-    private void pathGradient (int [][]arr, Position startPosition, Position goalPosition) {
-
-        int rowPath = startPosition.getRowIndex() - goalPosition.getRowIndex();
-        int colPath = startPosition.getColumnIndex() - goalPosition.getColumnIndex();
-        makePath(startPosition.getRowIndex(),startPosition.getColumnIndex(), rowPath,colPath ,arr);
+    private void makePath(Position startPosition, Position goalPosition, int[][] arr) {
+        int i = 0, j = 0;
+        if (startPosition.getRowIndex() == 0) {
+            for (i = startPosition.getRowIndex() + 1; i < arr.length - 2; i++)
+                arr[i][startPosition.getColumnIndex()] = 0;
+            if ((startPosition.getColumnIndex() >= goalPosition.getColumnIndex()))
+                for (j = startPosition.getColumnIndex(); j >= goalPosition.getColumnIndex(); j--)
+                    arr[goalPosition.getRowIndex() - 1][j] = 0;
+            else for (j = startPosition.getColumnIndex(); j <= goalPosition.getColumnIndex(); j++)
+                arr[goalPosition.getRowIndex() - 1][j] = 0;
+        }
+        if (startPosition.getRowIndex() == arr.length - 1) {
+            for (i = startPosition.getRowIndex() - 1; i > 0; i--)
+                arr[i][startPosition.getColumnIndex()] = 0;
+            if ((startPosition.getColumnIndex() >= goalPosition.getColumnIndex()))
+                for (j = startPosition.getColumnIndex(); j >= goalPosition.getColumnIndex(); j--)
+                    arr[goalPosition.getRowIndex() + 1][j] = 0;
+            else for (j = startPosition.getColumnIndex(); j <= goalPosition.getColumnIndex(); j++)
+                arr[goalPosition.getRowIndex() + 1][j] = 0;
+        }
     }
 
-    private void makePath(int startRow, int startCol, int verticalSteps, int horiznalSteps, int [][]arr){
-        int i=0,j=0;
-        if (verticalSteps<0)
-            for (i=startRow+1;i<arr.length-1;i++){
-                arr[i][startCol] = 0;
-            }
-        if (verticalSteps>0)
-            for (i=startRow-1;i<verticalSteps;i--){
-                arr[i][startCol]=0;
-            }
-        if (horiznalSteps<0)
-            for (j=startCol;j<horiznalSteps;j++){
-                arr[i][startCol]=0;
-            }
-        if (verticalSteps>0)
-            for (j=startCol;j<horiznalSteps;j--){
-                arr[i][startCol]=0;
-            }
+    private void randomizeWalls(int[][] arr) {
+        for (int i = 1; i < arr.length - 1; i++)
+            for (int j = 1; j < arr[i].length - 1; j++)
+                if (arr[i][j] == 1)
+                    arr[i][j] = (int) (Math.random() * 2);
     }
-
-    private void randomizeWalls(int [][] arr){
-        for(int i=1 ;i<arr.length-1;i++)
-            for(int j=1;j<arr[i].length-1;j++)
-                if(arr[i][j]==1)
-                    arr[i][j]=(int)(Math.random()*2);
-    }
-
-    public static void main(String[] args) {
-        IMazeGenerator sMaze = new SimpleMazeGenerator();
-        Maze maze = sMaze.generate(10, 8);
-        maze.print();
-    }
-
 }
