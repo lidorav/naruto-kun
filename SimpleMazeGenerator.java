@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 
 /**
- * testing gitttt blablabla
- */
+ * testing gitttt blablabla Hello World
+ *sfsfsfsfsfsfsfs
+ * **/
 public class SimpleMazeGenerator extends AMazeGenerator {
     public SimpleMazeGenerator() {
     }
