@@ -1,5 +1,11 @@
 package algorithms.mazeGenerators;
 
+import algorithms.search.ISearchable;
+import algorithms.search.MazeState;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Maze {
     private int [][] m_2DArr;
     private Position startPosition;
@@ -41,7 +47,6 @@ public class Maze {
             System.out.print("] \n");
         }
     }
-
 }
 
 
