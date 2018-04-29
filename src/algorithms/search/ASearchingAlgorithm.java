@@ -4,14 +4,13 @@ package algorithms.search;
  * Abstract class that represent searching algorithms, it contains a variable that count the number of states developed
  */
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
-    int expandeable;
     protected int expandable;
 
     /**
      * C'tor - define that count variable as 0
      */
     public ASearchingAlgorithm() {
-        expandeable = 0;
+        expandable = 0;
     }
 
     /**
@@ -25,7 +24,7 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
      * @return the number of states developed until we found the solution
      */
     public  int getNumberOfNodesEvaluated() {
-        return expandeable;
+        return expandable;
     }
 
     /**

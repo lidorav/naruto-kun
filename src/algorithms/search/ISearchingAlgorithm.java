@@ -7,4 +7,4 @@ public interface ISearchingAlgorithm {
     String getName();
 }
 
-}
+
