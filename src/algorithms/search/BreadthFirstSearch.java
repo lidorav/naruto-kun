@@ -40,7 +40,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                     goalState.setCameFrom(neighbor.getCameFrom());
                     return new Solution(goalState);
                 }
-                // we know every neighbor in neighbors is unvisited - why?
+                // we know every neighbor in neighbors is unvisited
 
                 Q.add(neighbor);
                 // marks neighbor as visited in array
