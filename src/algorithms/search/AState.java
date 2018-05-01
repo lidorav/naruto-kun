@@ -5,7 +5,6 @@ package algorithms.search;
  * It contains the cost of the state, from where it came from and if he already been visited.
  */
 public abstract class AState {
-    private boolean visited;
     private double cost;
     private AState cameFrom;
 
@@ -19,12 +18,6 @@ public abstract class AState {
         this.cameFrom = cameFrom;
     }
 
-    /**
-     * @return if the state has already been visited
-     */
-    public boolean isVisited() {
-        return visited;
-    }
 
     /**
      * @return the state price
@@ -38,14 +31,6 @@ public abstract class AState {
      */
     public AState getCameFrom() {
         return cameFrom;
-    }
-
-    /**
-     * Set if the state been visited
-     * @param visited true - if we visit that state before , false otherwise.
-     */
-    public void setVisited(boolean visited) {
-        this.visited = visited;
     }
 
     /**
