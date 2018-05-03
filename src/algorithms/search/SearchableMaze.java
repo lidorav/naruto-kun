@@ -5,13 +5,12 @@ import algorithms.mazeGenerators.Position;
 import java.util.ArrayList;
 
 /**
- * A class that represent a searchable maze, it contains the maze itself, the start state and the goal state.
+ * A class that represent a searchable maze, it contains the maze itself, the start start and the goal state.
  */
 public class SearchableMaze implements ISearchable {
     private Maze maze;
     private MazeState startState;
     private MazeState endState;
-    private boolean[][] visited;
 
     /**
      * C'tor - Create a searchable maze by defining the start state and the goal state
@@ -20,10 +19,7 @@ public class SearchableMaze implements ISearchable {
     public SearchableMaze(Maze maze) {
         this.maze = maze;
         startState = new MazeState(maze.getStartPosition(),0,null);
-        startState.setVisited(true);
         endState = new MazeState(maze.getGoalPosition(),1,null);
-        visited = new boolean[maze.getM_2DArr().length][maze.getM_2DArr()[0].length];
-        visited[maze.getStartPosition().getRowIndex()][maze.getStartPosition().getColumnIndex()]=true;
     }
 
     /**
@@ -69,14 +65,12 @@ public class SearchableMaze implements ISearchable {
                             //add the diagonal neighbor to the neighbors list
                             states.add(new MazeState(new Position(neighborX, neighborY), 1.5, s));
                             //mark the neighbor as visited
-                            visited[neighborX][neighborY]=true;
                         } else
                             continue;
                     }
                     else{
                         //add the neighbor the the neighbors list
                         states.add(new MazeState(new Position(neighborX, neighborY), 1, s));
-                        visited[neighborX][neighborY]=true;
                     }
                 }
             }
@@ -122,7 +116,6 @@ public class SearchableMaze implements ISearchable {
     private boolean checkValidNeighbor(int xCord, int yCord){
         if (xCord > 0 && xCord < maze.getM_2DArr().length -1 && yCord > 0 && yCord < maze.getM_2DArr()[0].length)
             if(maze.getM_2DArr()[xCord][yCord]!= 1)
-                if(!visited[xCord][yCord])
                     return true;
         return false;
     }

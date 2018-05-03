@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface ISearchable {
 
-    public MazeState getStartState();
-    public MazeState getGoalState();
+    public AState getStartState();
+    public AState getGoalState();
         public ArrayList <AState> getAllPossibleStates(AState s);
 }
