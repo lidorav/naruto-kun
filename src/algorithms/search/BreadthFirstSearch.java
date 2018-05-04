@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class BreadthFirstSearch extends ASearchingAlgorithm {
 
-    private Queue<AState> openQ;
+    private PriorityQueue<AState> openQ;
     private HashSet<AState> closed;
 
     /**
@@ -15,8 +15,9 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
      */
     public BreadthFirstSearch() {
         super();
-        // declares new queue
-        openQ = new LinkedList<>();
+        Comparator<AState> comparator = (o1, o2) -> 0;
+        // declares new pqueue
+        openQ = new  PriorityQueue<>(comparator);
         //declares new hash-set
         closed = new HashSet<>();
     }

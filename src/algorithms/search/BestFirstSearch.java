@@ -2,11 +2,9 @@ package algorithms.search;
 import java.util.*;
 
 public class BestFirstSearch extends BreadthFirstSearch {
-    private PriorityQueue<AState> openQ;
-
 
     public BestFirstSearch() {
-        super();
+        PriorityQueue openQ=new PriorityQueue<>();
         Comparator<AState> comparator = new Comparator<AState>() {
             @Override
             public int compare(AState o1, AState o2) {
@@ -18,14 +16,16 @@ public class BestFirstSearch extends BreadthFirstSearch {
                 return 0;
             }
         };
-        openQ=new PriorityQueue<AState>(comparator);
+        openQ = new PriorityQueue<AState>(comparator);
+
 
     }
-        @Override
-        public Solution solve(ISearchable domain){
+
+    public Solution solve(ISearchable domain){
         return super.solve(domain);
 
     }
+
 
 
 
