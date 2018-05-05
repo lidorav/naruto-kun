@@ -47,4 +47,10 @@ public abstract class AState {
      * @return true if the 2 states equal, false otherwise
      */
     public abstract boolean equals(Object o);
+
+    /**
+     * define hash code for each state
+     * @return the hash code
+     */
+    public abstract int hashCode();
 }

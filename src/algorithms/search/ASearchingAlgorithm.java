@@ -1,16 +1,21 @@
 package algorithms.search;
 
+import java.util.HashSet;
+
 /**
  * Abstract class that represent searching algorithms, it contains a variable that count the number of states developed
  */
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
     protected int expandable;
+    protected HashSet<AState> closed;
+
 
     /**
      * C'tor - define that count variable as 0
      */
     public ASearchingAlgorithm() {
         this.expandable = 0;
+        closed = new HashSet<>();
     }
 
     /**

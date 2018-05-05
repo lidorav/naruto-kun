@@ -27,7 +27,7 @@ public class SearchableMaze implements ISearchable {
      * @return start state
      */
     @Override
-    public MazeState getStartState() {
+    public AState getStartState() {
         return startState;
     }
 
@@ -36,7 +36,7 @@ public class SearchableMaze implements ISearchable {
      * @return goal state
      */
     @Override
-    public MazeState getGoalState() {
+    public AState getGoalState() {
         return endState;
     }
 
@@ -47,9 +47,9 @@ public class SearchableMaze implements ISearchable {
      */
     @Override
     public ArrayList<AState> getAllPossibleStates(AState as) {
-        MazeState s = (MazeState) as;
+        MazeState ms = (MazeState) as;
         ArrayList<AState> states = new ArrayList<>();
-        Position current = s.getPos();
+        Position current = ms.getPos();
 
         //check all 8 directions
         for (int xOffset= -1; xOffset <= 1; xOffset++) {
@@ -63,14 +63,14 @@ public class SearchableMaze implements ISearchable {
                         //check if the diagonal neighbor has a valid path
                         if (checkDiagonalPath(xOffset, yOffSet, current)) {
                             //add the diagonal neighbor to the neighbors list
-                            states.add(new MazeState(new Position(neighborX, neighborY), 1.5, s));
+                            states.add(new MazeState(new Position(neighborX, neighborY), 1.5, ms));
                             //mark the neighbor as visited
                         } else
                             continue;
                     }
                     else{
                         //add the neighbor the the neighbors list
-                        states.add(new MazeState(new Position(neighborX, neighborY), 1, s));
+                        states.add(new MazeState(new Position(neighborX, neighborY), 1, ms));
                     }
                 }
             }
@@ -87,7 +87,7 @@ public class SearchableMaze implements ISearchable {
      */
     private boolean checkDiagonalPath(int xOffset, int yOffset, Position current) {
         int currentX = current.getRowIndex();
-        int currentY = current.getRowIndex();
+        int currentY = current.getColumnIndex();
         switch(xOffset*2+yOffset){
 
             case -1:

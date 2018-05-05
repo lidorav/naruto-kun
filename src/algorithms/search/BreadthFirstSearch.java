@@ -7,18 +7,15 @@ import java.util.*;
  */
 public class BreadthFirstSearch extends ASearchingAlgorithm {
 
-    private Queue<AState> openQ;
-    private HashSet<AState> closed;
+    protected Queue<AState> openQ;
 
     /**
      * C'tor - Creates a BFS cont
      */
     public BreadthFirstSearch() {
-        super();
         // declares new queue
         openQ = new LinkedList<>();
         //declares new hash-set
-        closed = new HashSet<>();
     }
 
     /**
@@ -32,8 +29,8 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         AState goalState = domain.getGoalState();
         // pushes source to Q
         openQ.add(startState);
-        // enters main loop - checks if Q is nonempty
         closed.add(startState);
+        // enters main loop - checks if Q is nonempty
         while (!openQ.isEmpty()) {
             // gets next element off of queue
             AState current = openQ.remove();
@@ -49,8 +46,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                     goalState.setCameFrom(neighbor.getCameFrom());
                     return new Solution(goalState);
                 }
-                // we know every neighbor in neighbors is unvisited - why?
-
+                // we know every neighbor in neighbors is unvisited
                 openQ.add(neighbor);
                 // marks neighbor as visited in array
                 closed.add(neighbor);

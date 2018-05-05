@@ -6,21 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * A class that builds a maze using Prim algorithm.
+ * Prim’s approaches the problem from a different angle.
+ * Rather than working edgewise across the entire graph, it starts at one point, and grows outward from that point.
+ */
 public class MyMazeGenerator extends AMazeGenerator {
     private int[][] map;
     private List<Pair<Position, Position>> walls;
     private int width;
     private int height;
 
-    public MyMazeGenerator() {
-    }
-
     /**
-     * Main function to generate
-     *
-     * @param row
-     * @param col
-     * @return
+     * Main function to generate the maze
+     * @param row the width of the maze
+     * @param col the height of the maze
+     * @return a Maze
      */
     public Maze generate(int row, int col) {
         init(row, col);
@@ -63,8 +64,17 @@ public class MyMazeGenerator extends AMazeGenerator {
         return new Maze(map, startP, endP);
     }
 
+    /**
+     * Initialize the variables needed to generate the maze
+     * @param row maze width
+     * @param col maze height
+     */
     private void init(int row, int col) {
         //initialize variables
+        if(row < 4 || col<4){
+            row=10;
+            col=10;
+        }
         height = row;
         width = col;
         map = new int[height][width];
